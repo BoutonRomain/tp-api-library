@@ -53,6 +53,6 @@ export class AuthorController extends Controller {
           error.status = 404;
           throw error;
       }
-    return authorService.updateAuthor(id, firstName, lastName);
+    return author;
   }
 }
