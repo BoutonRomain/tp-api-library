@@ -2,6 +2,7 @@ import { Controller, Get, Post, Delete, Route, Path, Body, Tags, Patch } from "t
 import { authorService } from "../services/author.service";
 import { AuthorDTO } from "../dto/author.dto";
 import { Author } from "../models/author.model";
+import {CustomError} from "../middlewares/errorHandler";
 
 @Route("authors")
 @Tags("Authors")
@@ -15,6 +16,12 @@ export class AuthorController extends Controller {
   // Récupère un auteur par ID
   @Get("{id}")
   public async getAuthorById(@Path() id: number): Promise<AuthorDTO | null> {
+      let author: Author | null = await authorService.getAuthorById(id);
+      if (!author) {
+          let error: CustomError = new Error("Author not found");
+          error.status = 404;
+          throw error;
+      }
     return authorService.getAuthorById(id);
   }
 
