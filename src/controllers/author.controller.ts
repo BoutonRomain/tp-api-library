@@ -47,6 +47,12 @@ export class AuthorController extends Controller {
     @Body() requestBody: AuthorDTO
   ): Promise<AuthorDTO | null> {
     const { firstName, lastName } = requestBody;
+      let author: Author | null = await authorService.updateAuthor(id, firstName, lastName);
+      if (!author) {
+          let error: CustomError = new Error("Author not found");
+          error.status = 404;
+          throw error;
+      }
     return authorService.updateAuthor(id, firstName, lastName);
   }
 }
