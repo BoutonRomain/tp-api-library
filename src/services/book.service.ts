@@ -10,6 +10,14 @@ export class BookService {
         }]
     });
   }
+
+  public async getBookById(id: number): Promise<Book | null> {
+      return Book.findByPk(id, {
+          include: [{
+              model: Author,
+              as: 'author'}]
+      });
+  }
 }
 
 export const bookService = new BookService();
