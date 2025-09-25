@@ -1,4 +1,4 @@
-import {Body, Controller, Delete, Get, Patch, Path, Post, Route, Tags} from "tsoa";
+import {Body, Controller, Delete, Get, Patch, Path, Post, Route, Security, Tags} from "tsoa";
 import { BookDTO } from "../dto/book.dto";
 import { bookService } from "../services/book.service";
 import {CustomError} from "../middlewares/errorHandler";
@@ -12,12 +12,14 @@ import {BookCopyDTO} from "../dto/bookCopy.dto";
 @Route("books")
 @Tags("Books")
 export class BookController extends Controller {
-  @Get("/")
+    @Security("jwt", ["get-book"])
+    @Get("/")
   public async getAllBooks(): Promise<BookDTO[]> {
     return bookService.getAllBooks();
   }
 
-  @Get("{id}")
+    @Security("jwt", ["get-book"])
+    @Get("{id}")
     public async getBookById(id: number): Promise<BookDTO> {
       let book: Book | null = await bookService.getBookById(id);
 
@@ -29,13 +31,15 @@ export class BookController extends Controller {
       return toDto(book);
   }
 
-  @Post("/")
+    @Security("jwt", ["post-book"])
+    @Post("/")
     public async createBook(@Body() responseBody: BookPostDTO): Promise<BookDTO> {
       const {title, publishYear, authorId, isbn} = responseBody;
       return bookService.createBook(title, publishYear, authorId, isbn);
   }
 
-  @Patch( "{id}")
+    @Security("jwt", ["patch-book"])
+    @Patch( "{id}")
     public async updateBook(
         @Path() id: number,
         @Body() responseBody: BookPatchDTO): Promise<BookDTO | null> {
@@ -49,12 +53,14 @@ export class BookController extends Controller {
       return book;
   }
 
-  @Delete("{id}")
+    @Security("jwt", ["delete-books"])
+    @Delete("{id}")
     public async deleteBook(@Path() id: number): Promise<void> {
       await bookService.deleteBook(id);
   }
 
-  @Get("{id}/books-collections")
+    @Security("jwt", ["get-book"])
+    @Get("{id}/books-collections")
     public async getBookCopiesByBookId(@Path() id: number): Promise<BookCopyDTO[]> {
       const book: Book | null = await Book.findByPk(id);
       if (!book) {

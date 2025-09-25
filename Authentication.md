@@ -1,4 +1,4 @@
-#Exercice
+# Exercice
 
 1) Créer une table utilisateur qui comprendra les logins et des utilisateurs
 2) Créer une route /auth qui prendra en entrée un login + mot de passe et générera un token JWT simple

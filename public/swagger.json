@@ -223,7 +223,13 @@
 				"tags": [
 					"BookCopys"
 				],
-				"security": [],
+				"security": [
+					{
+						"jwt": [
+							"get-bookCopy"
+						]
+					}
+				],
 				"parameters": []
 			},
 			"post": {
@@ -243,7 +249,13 @@
 				"tags": [
 					"BookCopys"
 				],
-				"security": [],
+				"security": [
+					{
+						"jwt": [
+							"post-bookCopy"
+						]
+					}
+				],
 				"parameters": [],
 				"requestBody": {
 					"required": true,
@@ -275,7 +287,13 @@
 				"tags": [
 					"BookCopys"
 				],
-				"security": [],
+				"security": [
+					{
+						"jwt": [
+							"get-bookCopy"
+						]
+					}
+				],
 				"parameters": [
 					{
 						"in": "path",
@@ -305,7 +323,13 @@
 				"tags": [
 					"BookCopys"
 				],
-				"security": [],
+				"security": [
+					{
+						"jwt": [
+							"patch-bookCopy"
+						]
+					}
+				],
 				"parameters": [
 					{
 						"in": "path",
@@ -338,7 +362,13 @@
 				"tags": [
 					"BookCopys"
 				],
-				"security": [],
+				"security": [
+					{
+						"jwt": [
+							"delete-bookCopy"
+						]
+					}
+				],
 				"parameters": [
 					{
 						"in": "path",
@@ -373,7 +403,13 @@
 				"tags": [
 					"Books"
 				],
-				"security": [],
+				"security": [
+					{
+						"jwt": [
+							"get-book"
+						]
+					}
+				],
 				"parameters": []
 			},
 			"post": {
@@ -393,7 +429,13 @@
 				"tags": [
 					"Books"
 				],
-				"security": [],
+				"security": [
+					{
+						"jwt": [
+							"post-book"
+						]
+					}
+				],
 				"parameters": [],
 				"requestBody": {
 					"required": true,
@@ -425,7 +467,13 @@
 				"tags": [
 					"Books"
 				],
-				"security": [],
+				"security": [
+					{
+						"jwt": [
+							"get-book"
+						]
+					}
+				],
 				"parameters": [
 					{
 						"in": "path",
@@ -460,7 +508,13 @@
 				"tags": [
 					"Books"
 				],
-				"security": [],
+				"security": [
+					{
+						"jwt": [
+							"patch-book"
+						]
+					}
+				],
 				"parameters": [
 					{
 						"in": "path",
@@ -493,7 +547,13 @@
 				"tags": [
 					"Books"
 				],
-				"security": [],
+				"security": [
+					{
+						"jwt": [
+							"delete-books"
+						]
+					}
+				],
 				"parameters": [
 					{
 						"in": "path",
@@ -528,7 +588,13 @@
 				"tags": [
 					"Books"
 				],
-				"security": [],
+				"security": [
+					{
+						"jwt": [
+							"get-book"
+						]
+					}
+				],
 				"parameters": [
 					{
 						"in": "path",
@@ -566,8 +632,7 @@
 				"security": [
 					{
 						"jwt": [
-							"write",
-							"read"
+							"get-author"
 						]
 					}
 				],
@@ -593,8 +658,7 @@
 				"security": [
 					{
 						"jwt": [
-							"write",
-							"read"
+							"post-author"
 						]
 					}
 				],
@@ -637,8 +701,7 @@
 				"security": [
 					{
 						"jwt": [
-							"write",
-							"read"
+							"get-author"
 						]
 					}
 				],
@@ -667,8 +730,7 @@
 				"security": [
 					{
 						"jwt": [
-							"write",
-							"read"
+							"delete-author"
 						]
 					}
 				],
@@ -709,8 +771,7 @@
 				"security": [
 					{
 						"jwt": [
-							"write",
-							"read"
+							"patch-author"
 						]
 					}
 				],
@@ -761,8 +822,7 @@
 				"security": [
 					{
 						"jwt": [
-							"write",
-							"read"
+							"get-author"
 						]
 					}
 				],

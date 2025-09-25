@@ -126,6 +126,7 @@ export function RegisterRoutes(app: Router) {
         const argsBookCopyController_getAllBooks: Record<string, TsoaRoute.ParameterSchema> = {
         };
         app.get('/bookCopys',
+            authenticateMiddleware([{"jwt":["get-bookCopy"]}]),
             ...(fetchMiddlewares<RequestHandler>(BookCopyController)),
             ...(fetchMiddlewares<RequestHandler>(BookCopyController.prototype.getAllBooks)),
 
@@ -156,6 +157,7 @@ export function RegisterRoutes(app: Router) {
                 id: {"in":"path","name":"id","required":true,"dataType":"double"},
         };
         app.get('/bookCopys/:id',
+            authenticateMiddleware([{"jwt":["get-bookCopy"]}]),
             ...(fetchMiddlewares<RequestHandler>(BookCopyController)),
             ...(fetchMiddlewares<RequestHandler>(BookCopyController.prototype.getBookById)),
 
@@ -186,6 +188,7 @@ export function RegisterRoutes(app: Router) {
                 body: {"in":"body","name":"body","required":true,"ref":"BookCopyPostDTO"},
         };
         app.post('/bookCopys',
+            authenticateMiddleware([{"jwt":["post-bookCopy"]}]),
             ...(fetchMiddlewares<RequestHandler>(BookCopyController)),
             ...(fetchMiddlewares<RequestHandler>(BookCopyController.prototype.createBookCopy)),
 
@@ -217,6 +220,7 @@ export function RegisterRoutes(app: Router) {
                 body: {"in":"body","name":"body","required":true,"ref":"BookCopyPatchDTO"},
         };
         app.patch('/bookCopys/:id',
+            authenticateMiddleware([{"jwt":["patch-bookCopy"]}]),
             ...(fetchMiddlewares<RequestHandler>(BookCopyController)),
             ...(fetchMiddlewares<RequestHandler>(BookCopyController.prototype.updateBookCopy)),
 
@@ -247,6 +251,7 @@ export function RegisterRoutes(app: Router) {
                 id: {"in":"path","name":"id","required":true,"dataType":"double"},
         };
         app.delete('/bookCopys/:id',
+            authenticateMiddleware([{"jwt":["delete-bookCopy"]}]),
             ...(fetchMiddlewares<RequestHandler>(BookCopyController)),
             ...(fetchMiddlewares<RequestHandler>(BookCopyController.prototype.deleteBookCopy)),
 
@@ -276,6 +281,7 @@ export function RegisterRoutes(app: Router) {
         const argsBookController_getAllBooks: Record<string, TsoaRoute.ParameterSchema> = {
         };
         app.get('/books',
+            authenticateMiddleware([{"jwt":["get-book"]}]),
             ...(fetchMiddlewares<RequestHandler>(BookController)),
             ...(fetchMiddlewares<RequestHandler>(BookController.prototype.getAllBooks)),
 
@@ -306,6 +312,7 @@ export function RegisterRoutes(app: Router) {
                 id: {"in":"path","name":"id","required":true,"dataType":"double"},
         };
         app.get('/books/:id',
+            authenticateMiddleware([{"jwt":["get-book"]}]),
             ...(fetchMiddlewares<RequestHandler>(BookController)),
             ...(fetchMiddlewares<RequestHandler>(BookController.prototype.getBookById)),
 
@@ -336,6 +343,7 @@ export function RegisterRoutes(app: Router) {
                 responseBody: {"in":"body","name":"responseBody","required":true,"ref":"BookPostDTO"},
         };
         app.post('/books',
+            authenticateMiddleware([{"jwt":["post-book"]}]),
             ...(fetchMiddlewares<RequestHandler>(BookController)),
             ...(fetchMiddlewares<RequestHandler>(BookController.prototype.createBook)),
 
@@ -367,6 +375,7 @@ export function RegisterRoutes(app: Router) {
                 responseBody: {"in":"body","name":"responseBody","required":true,"ref":"BookPatchDTO"},
         };
         app.patch('/books/:id',
+            authenticateMiddleware([{"jwt":["patch-book"]}]),
             ...(fetchMiddlewares<RequestHandler>(BookController)),
             ...(fetchMiddlewares<RequestHandler>(BookController.prototype.updateBook)),
 
@@ -397,6 +406,7 @@ export function RegisterRoutes(app: Router) {
                 id: {"in":"path","name":"id","required":true,"dataType":"double"},
         };
         app.delete('/books/:id',
+            authenticateMiddleware([{"jwt":["delete-books"]}]),
             ...(fetchMiddlewares<RequestHandler>(BookController)),
             ...(fetchMiddlewares<RequestHandler>(BookController.prototype.deleteBook)),
 
@@ -427,6 +437,7 @@ export function RegisterRoutes(app: Router) {
                 id: {"in":"path","name":"id","required":true,"dataType":"double"},
         };
         app.get('/books/:id/books-collections',
+            authenticateMiddleware([{"jwt":["get-book"]}]),
             ...(fetchMiddlewares<RequestHandler>(BookController)),
             ...(fetchMiddlewares<RequestHandler>(BookController.prototype.getBookCopiesByBookId)),
 
@@ -456,7 +467,7 @@ export function RegisterRoutes(app: Router) {
         const argsAuthorController_getAllAuthors: Record<string, TsoaRoute.ParameterSchema> = {
         };
         app.get('/authors',
-            authenticateMiddleware([{"jwt":["write","read"]}]),
+            authenticateMiddleware([{"jwt":["get-author"]}]),
             ...(fetchMiddlewares<RequestHandler>(AuthorController)),
             ...(fetchMiddlewares<RequestHandler>(AuthorController.prototype.getAllAuthors)),
 
@@ -487,7 +498,7 @@ export function RegisterRoutes(app: Router) {
                 id: {"in":"path","name":"id","required":true,"dataType":"double"},
         };
         app.get('/authors/:id',
-            authenticateMiddleware([{"jwt":["write","read"]}]),
+            authenticateMiddleware([{"jwt":["get-author"]}]),
             ...(fetchMiddlewares<RequestHandler>(AuthorController)),
             ...(fetchMiddlewares<RequestHandler>(AuthorController.prototype.getAuthorById)),
 
@@ -518,7 +529,7 @@ export function RegisterRoutes(app: Router) {
                 requestBody: {"in":"body","name":"requestBody","required":true,"ref":"AuthorDTO"},
         };
         app.post('/authors',
-            authenticateMiddleware([{"jwt":["write","read"]}]),
+            authenticateMiddleware([{"jwt":["post-author"]}]),
             ...(fetchMiddlewares<RequestHandler>(AuthorController)),
             ...(fetchMiddlewares<RequestHandler>(AuthorController.prototype.createAuthor)),
 
@@ -549,7 +560,7 @@ export function RegisterRoutes(app: Router) {
                 id: {"in":"path","name":"id","required":true,"dataType":"double"},
         };
         app.delete('/authors/:id',
-            authenticateMiddleware([{"jwt":["write","read"]}]),
+            authenticateMiddleware([{"jwt":["delete-author"]}]),
             ...(fetchMiddlewares<RequestHandler>(AuthorController)),
             ...(fetchMiddlewares<RequestHandler>(AuthorController.prototype.deleteAuthor)),
 
@@ -581,7 +592,7 @@ export function RegisterRoutes(app: Router) {
                 requestBody: {"in":"body","name":"requestBody","required":true,"ref":"AuthorDTO"},
         };
         app.patch('/authors/:id',
-            authenticateMiddleware([{"jwt":["write","read"]}]),
+            authenticateMiddleware([{"jwt":["patch-author"]}]),
             ...(fetchMiddlewares<RequestHandler>(AuthorController)),
             ...(fetchMiddlewares<RequestHandler>(AuthorController.prototype.updateAuthor)),
 
@@ -612,7 +623,7 @@ export function RegisterRoutes(app: Router) {
                 id: {"in":"path","name":"id","required":true,"dataType":"double"},
         };
         app.get('/authors/:id/books',
-            authenticateMiddleware([{"jwt":["write","read"]}]),
+            authenticateMiddleware([{"jwt":["get-author"]}]),
             ...(fetchMiddlewares<RequestHandler>(AuthorController)),
             ...(fetchMiddlewares<RequestHandler>(AuthorController.prototype.getBooksByAuthor)),
 

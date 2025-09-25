@@ -1,4 +1,4 @@
-import {Body, Controller, Delete, Get, Patch, Path, Post, Route, Tags} from "tsoa";
+import {Body, Controller, Delete, Get, Patch, Path, Post, Route, Security, Tags} from "tsoa";
 import {bookCollectionService} from "../services/bookCollection.service";
 import {BookCopyDTO} from "../dto/bookCopy.dto";
 import {BookCopy} from "../models/bookCopy.model";
@@ -13,11 +13,13 @@ import {bookService} from "../services/book.service";
 export class BookCopyController extends Controller {
 
     //Récupérer l'ensemble des livres disponibles
+    @Security("jwt", ["get-bookCopy"])
     @Get("/")
     public async getAllBooks(): Promise<BookCopyDTO[]> {
         return bookCollectionService.getAllBooks();
     }
 
+    @Security("jwt", ["get-bookCopy"])
     @Get("{id}")
     public async getBookById(id: number): Promise<BookCopyDTO> {
         let bookCopy: BookCopy | null = await bookCollectionService.getBookCopyById(id);
@@ -29,12 +31,14 @@ export class BookCopyController extends Controller {
         return toDto(bookCopy);
     }
 
+    @Security("jwt", ["post-bookCopy"])
     @Post("/")
     public async createBookCopy(@Body() body: BookCopyPostDTO): Promise<BookCopyDTO> {
         const { bookId, state, available } = body;
         return bookCollectionService.createCopy(bookId, state, available);
     }
 
+    @Security("jwt", ["patch-bookCopy"])
     @Patch("{id}")
     public async updateBookCopy(
         @Path() id: number,
@@ -45,6 +49,7 @@ export class BookCopyController extends Controller {
         return bookCopy;
     }
 
+    @Security("jwt", ["delete-bookCopy"])
     @Delete("{id}")
     public async deleteBookCopy(@Path() id: number): Promise<void> {
         return bookCollectionService.deleteBookCopy(id);
