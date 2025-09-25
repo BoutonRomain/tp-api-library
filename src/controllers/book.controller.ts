@@ -44,6 +44,6 @@ export class BookController extends Controller {
           error.status = 404;
           throw error;
       }
-      return bookService.updateBook(id, title, publishYear, authorId, isbn)
+      return book;
   }
 }

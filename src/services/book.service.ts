@@ -39,9 +39,9 @@ export class BookService {
     public async updateBook(id: number, title?: string, publishYear?: number, authorId?: number, isbn?: string): Promise<BookDTO | null> {
         const book = await Book.findByPk(id);
         if (book) {
-            if (title) book.title = title;
-            if (publishYear) book.publishYear = publishYear;
-            if (authorId) {
+            if (title !== undefined) book.title = title;
+            if (publishYear !== undefined) book.publishYear = publishYear;
+            if (authorId !== undefined) {
                 let author: Author | null = await this.authorService.getAuthorById(authorId);
                 if (!author) {
                     let error: CustomError = new Error("Author not found");
@@ -50,11 +50,14 @@ export class BookService {
                 }
                 book.author = author;
             }
-            if (isbn) book.isbn = isbn;
+            if (isbn !== undefined) book.isbn = isbn;
             await book.save();
             return book;
+        } {
+            let error: CustomError = new Error(`Book ${id} not found`);
+            error.status = 404;
+            throw error;
         }
-        return null;
     }
 }
 
