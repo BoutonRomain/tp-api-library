@@ -3,10 +3,8 @@ import { authorService } from "../services/author.service";
 import { AuthorDTO } from "../dto/author.dto";
 import { Author } from "../models/author.model";
 import {CustomError} from "../middlewares/errorHandler";
-import {BookCopyDTO} from "../dto/bookCopy.dto";
 import {BookDTO} from "../dto/book.dto";
 import {bookService} from "../services/book.service";
-import {Book} from "../models/book.model";
 
 @Route("authors")
 @Tags("Authors")

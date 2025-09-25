@@ -3,11 +3,18 @@
   "noImplicitAdditionalProperties": "throw-on-extras",
   "controllerPathGlobs": ["src/controllers/*.ts"],
   "spec": {
+    "securityDefinition" : {
+      "jwt": {
+        "in": "header",
+        "name": "Authorization"
+      }
+    },
     "outputDirectory": "public",
     "specVersion": 3
   },
   "routes": {
     "routesDir": "src/routes",
-    "routesFileName": "index.ts"
+    "routesFileName": "index.ts",
+    "authenticationModule": "src/middleware/authentication.ts"
   }
 }
