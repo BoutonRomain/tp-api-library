@@ -3,6 +3,10 @@ import { authorService } from "../services/author.service";
 import { AuthorDTO } from "../dto/author.dto";
 import { Author } from "../models/author.model";
 import {CustomError} from "../middlewares/errorHandler";
+import {BookCopyDTO} from "../dto/bookCopy.dto";
+import {BookDTO} from "../dto/book.dto";
+import {bookService} from "../services/book.service";
+import {Book} from "../models/book.model";
 
 @Route("authors")
 @Tags("Authors")
@@ -55,4 +59,14 @@ export class AuthorController extends Controller {
       }
     return author;
   }
+    @Get("{id}/books")
+    public async getBooksByAuthor(@Path() id: number): Promise<BookDTO[]> {
+      const author: Author | null = await Author.findByPk(id);
+      if (!author) {
+          let error: CustomError = new Error(`Author ${id} not found`);
+          error.status = 404;
+          throw error;
+      }
+      return bookService.getBooksByAuthorId(id);
+    }
 }

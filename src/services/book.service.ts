@@ -3,6 +3,8 @@ import { Book } from "../models/book.model";
 import {BookDTO} from "../dto/book.dto";
 import {AuthorService} from "./author.service";
 import {CustomError} from "../middlewares/errorHandler";
+import {BookCopy} from "../models/bookCopy.model";
+import {BookCopyDTO} from "../dto/bookCopy.dto";
 
 export class BookService {
 
@@ -58,6 +60,35 @@ export class BookService {
             error.status = 404;
             throw error;
         }
+    }
+
+    public async deleteBook(id: number) {
+        const book = await Book.findByPk(id);
+        if (book) {
+            const bookCopies: number = await BookCopy.count({
+                where: {
+                    bookId: book.id
+                }
+            })
+            if (bookCopies === 0) await book.destroy();
+            else {
+                let error: CustomError = new Error(`Book ${id} cannot be deleted because ${bookCopies} copies are in stock`);
+                error.status = 403;
+                throw error;
+            }
+        }
+        let error: CustomError = new Error(`Book ${id} not found`);
+        error.status = 404;
+        throw error;
+    }
+
+    public async getBooksByAuthorId(id: number): Promise<BookDTO[]> {
+      const booksByAuthor: BookDTO[] = await Book.findAll({
+          where: {
+              authorId: id
+          }
+      })
+      return booksByAuthor;
     }
 }
 

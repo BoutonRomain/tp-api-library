@@ -62,6 +62,25 @@ export class BookCollectionService {
         await bookCopy.save();
         return bookCopy;
     }
+
+    public async deleteBookCopy(id: number) {
+        const bookCopy: BookCopy | null = await BookCopy.findByPk(id);
+        if (!bookCopy) {
+            let error: CustomError = new Error(`BookCopy ${id} not found`);
+            error.status = 404;
+            throw error;
+        }
+        await bookCopy.destroy();
+    }
+
+    public async getBookCopiesByBookId(id: number): Promise<BookCopyDTO[]> {
+        const bookCopiesByAuthor: BookCopyDTO[] = await BookCopy.findAll({
+            where: {
+                bookId: id
+            }
+        })
+        return bookCopiesByAuthor;
+    }
 }
 
 export const bookCollectionService = new BookCollectionService();
