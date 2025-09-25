@@ -1,5 +1,10 @@
 import * as express from "express";
 import * as jwt from "jsonwebtoken";
+
+let adminRights = [];
+let userRights = [];
+let managerRights = [];
+
 export function expressAuthentication (
     request: express.Request,
     securityName: string,

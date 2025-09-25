@@ -3,7 +3,6 @@ import {AuthenticationDTO} from "../dto/authentication.dto";
 import {CustomError} from "../middlewares/errorHandler";
 import {authenticationService} from "../services/authentication.service";
 
-@Tags("Authentication")
 @Route("auth")
 export class AuthenticationController extends Controller {
     @Post("/")

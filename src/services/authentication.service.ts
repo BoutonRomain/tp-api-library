@@ -4,7 +4,8 @@ import {CustomError} from "../middlewares/errorHandler";
 
 export class AuthenticationService {
     public async authenticate(username: string, password: string): Promise<string> {
-        const user = await User.findOne({where: { username: username }});
+        const user = await User.findOne({where: { username, password }});
+
         if (!user) {
             let error: CustomError = new Error("Invalid credentials");
             error.status = 401;

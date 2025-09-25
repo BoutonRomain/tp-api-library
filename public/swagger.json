@@ -185,7 +185,13 @@
 				"additionalProperties": false
 			}
 		},
-		"securitySchemes": {}
+		"securitySchemes": {
+			"jwt": {
+				"type": "apiKey",
+				"in": "header",
+				"name": "Authorization"
+			}
+		}
 	},
 	"info": {
 		"title": "express-typescript",
@@ -557,7 +563,14 @@
 				"tags": [
 					"Authors"
 				],
-				"security": [],
+				"security": [
+					{
+						"jwt": [
+							"write",
+							"read"
+						]
+					}
+				],
 				"parameters": []
 			},
 			"post": {
@@ -577,7 +590,14 @@
 				"tags": [
 					"Authors"
 				],
-				"security": [],
+				"security": [
+					{
+						"jwt": [
+							"write",
+							"read"
+						]
+					}
+				],
 				"parameters": [],
 				"requestBody": {
 					"required": true,
@@ -614,7 +634,14 @@
 				"tags": [
 					"Authors"
 				],
-				"security": [],
+				"security": [
+					{
+						"jwt": [
+							"write",
+							"read"
+						]
+					}
+				],
 				"parameters": [
 					{
 						"in": "path",
@@ -637,7 +664,14 @@
 				"tags": [
 					"Authors"
 				],
-				"security": [],
+				"security": [
+					{
+						"jwt": [
+							"write",
+							"read"
+						]
+					}
+				],
 				"parameters": [
 					{
 						"in": "path",
@@ -672,7 +706,14 @@
 				"tags": [
 					"Authors"
 				],
-				"security": [],
+				"security": [
+					{
+						"jwt": [
+							"write",
+							"read"
+						]
+					}
+				],
 				"parameters": [
 					{
 						"in": "path",
@@ -717,7 +758,14 @@
 				"tags": [
 					"Authors"
 				],
-				"security": [],
+				"security": [
+					{
+						"jwt": [
+							"write",
+							"read"
+						]
+					}
+				],
 				"parameters": [
 					{
 						"in": "path",
@@ -754,9 +802,6 @@
 						}
 					}
 				},
-				"tags": [
-					"Authentication"
-				],
 				"security": [],
 				"parameters": [],
 				"requestBody": {
