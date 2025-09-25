@@ -1,9 +1,4 @@
 import { Author } from "../models/author.model";
-import errorHandler from "../middlewares/errorHandler";
-import {NOTFOUND} from "sqlite3";
-import {HostNotFoundError} from "sequelize";
-import ErrorHandler from "../middlewares/errorHandler";
-import {request, response} from "express";
 
 export class AuthorService {
   // Récupère tous les auteurs
