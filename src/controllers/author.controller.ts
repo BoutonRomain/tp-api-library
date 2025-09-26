@@ -11,14 +11,14 @@ import {bookService} from "../services/book.service";
 export class AuthorController extends Controller {
   // Récupère tous les auteurs
 
-    @Security("jwt", ["get-author"])
+    @Security("jwt", ["get-authors"])
     @Get("/")
   public async getAllAuthors(): Promise<AuthorDTO[]> {
     return authorService.getAllAuthors();
   }
 
   // Récupère un auteur par ID
-    @Security("jwt", ["get-author"])
+    @Security("jwt", ["get-authors"])
     @Get("{id}")
   public async getAuthorById(@Path() id: number): Promise<AuthorDTO | null> {
       let author: Author | null = await authorService.getAuthorById(id);
@@ -31,7 +31,7 @@ export class AuthorController extends Controller {
   }
 
   // Crée un nouvel auteur
-    @Security("jwt", ["post-author"])
+    @Security("jwt", ["post-authors"])
     @Post("/")
   public async createAuthor(
     @Body() requestBody: AuthorDTO
@@ -41,14 +41,14 @@ export class AuthorController extends Controller {
   }
 
   // Supprime un auteur par ID
-    @Security("jwt", ["delete-author"])
+    @Security("jwt", ["delete-authors"])
     @Delete("{id}")
   public async deleteAuthor(@Path() id: number): Promise<void> {
     await authorService.deleteAuthor(id);
   }
 
   // Met à jour un auteur par ID
-    @Security("jwt", ["patch-author"])
+    @Security("jwt", ["patch-authors"])
     @Patch("{id}")
   public async updateAuthor(
     @Path() id: number,
@@ -63,7 +63,7 @@ export class AuthorController extends Controller {
       }
     return author;
   }
-    @Security("jwt", ["get-author"])
+    @Security("jwt", ["get-authors"])
     @Get("{id}/books")
     public async getBooksByAuthor(@Path() id: number): Promise<BookDTO[]> {
       const author: Author | null = await Author.findByPk(id);
