@@ -1,7 +1,9 @@
-import {Body, Controller, Post, Route, Tags} from "tsoa";
+import {Body, Controller, Delete, Patch, Path, Post, Route, Security, Tags} from "tsoa";
 import {AuthenticationDTO} from "../dto/authentication.dto";
 import {CustomError} from "../middlewares/errorHandler";
 import {authenticationService} from "../services/authentication.service";
+import {UserDTO} from "../dto/user.dto";
+import {toDto} from "../mapper/user.mapper";
 
 @Route("auth")
 export class AuthenticationController extends Controller {
@@ -18,6 +20,22 @@ export class AuthenticationController extends Controller {
         const token = await authenticationService.authenticate(username, password);
 
         return { token };
+    }
+
+    @Security("jwt", ["delete-users"])
+    @Delete("{id}")
+    public async delete(@Path() id: number): Promise<void> {
+        await authenticationService.deleteUser(id);
+    }
+
+    @Security("jwt", ["patch-users"])
+    @Patch("{id}")
+    public async getUser(
+        @Path() id: number,
+        @Body() responseBody: UserDTO
+        ): Promise<UserDTO> {
+        const user = await authenticationService.patchUser(id, responseBody);
+        return toDto(user);
     }
 }
 
