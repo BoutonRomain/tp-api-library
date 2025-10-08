@@ -4,7 +4,9 @@ import {CustomError} from "../middlewares/errorHandler";
 import {authenticationService} from "../services/authentication.service";
 import {UserDTO} from "../dto/user.dto";
 import {toDto} from "../mapper/user.mapper";
+import {UserPatchDTO} from "../dto/user.patch.dto";
 
+@Tags("Users")
 @Route("auth")
 export class AuthenticationController extends Controller {
     @Post("/")
@@ -32,9 +34,10 @@ export class AuthenticationController extends Controller {
     @Patch("{id}")
     public async getUser(
         @Path() id: number,
-        @Body() responseBody: UserDTO
+        @Body() responseBody: UserPatchDTO
         ): Promise<UserDTO> {
-        const user = await authenticationService.patchUser(id, responseBody);
+        const { username, password } = responseBody;
+        const user = await authenticationService.updateUser(id, username, password);
         return toDto(user);
     }
 }

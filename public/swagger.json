@@ -203,6 +203,18 @@
 				],
 				"type": "object",
 				"additionalProperties": false
+			},
+			"UserPatchDTO": {
+				"properties": {
+					"username": {
+						"type": "string"
+					},
+					"password": {
+						"type": "string"
+					}
+				},
+				"type": "object",
+				"additionalProperties": false
 			}
 		},
 		"securitySchemes": {
@@ -882,6 +894,9 @@
 						}
 					}
 				},
+				"tags": [
+					"Users"
+				],
 				"security": [],
 				"parameters": [],
 				"requestBody": {
@@ -904,6 +919,9 @@
 						"description": "No content"
 					}
 				},
+				"tags": [
+					"Users"
+				],
 				"security": [
 					{
 						"jwt": [
@@ -937,6 +955,9 @@
 						}
 					}
 				},
+				"tags": [
+					"Users"
+				],
 				"security": [
 					{
 						"jwt": [
@@ -960,7 +981,7 @@
 					"content": {
 						"application/json": {
 							"schema": {
-								"$ref": "#/components/schemas/UserDTO"
+								"$ref": "#/components/schemas/UserPatchDTO"
 							}
 						}
 					}

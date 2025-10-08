@@ -23,7 +23,8 @@ export class BookService {
       return Book.findByPk(id, {
           include: [{
               model: Author,
-              as: 'author'}]
+              as: 'author'
+          }]
       });
   }
 

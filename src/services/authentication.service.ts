@@ -30,15 +30,15 @@ export class AuthenticationService {
         await user.destroy();
     }
 
-    public async patchUser(id: number, responseBody: UserDTO): Promise<User> {
+    public async updateUser(id: number, username: string | undefined, password: string | undefined): Promise<User> {
         let user: User | null = await User.findByPk(id);
         if (!user) {
             let error: CustomError = new Error(`User ${id} not found`);
             error.status = 404;
             throw error;
         }
-        if (responseBody.password) user.password = responseBody.password;
-        if (responseBody.username) user.username = responseBody.username;
+        if (password) user.password = password;
+        if (username) user.username = username;
         await user.save();
         return user;
     }
